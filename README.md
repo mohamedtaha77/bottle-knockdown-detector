@@ -2,7 +2,7 @@
 
 A Flutter Android application that uses a custom-trained **YOLOv11s** AI model to automatically detect and score bottle knockdowns from toy-car race videos.
 
-Built as a bonus project for **DSAI 352** — Spring 2026.
+**Zewail City University for Science and Technology** — Spring 2026.
 
 ---
 
@@ -157,4 +157,4 @@ adb install -r -t build/app/outputs/flutter-apk/app-debug.apk
 
 ## 📄 License
 
-Academic use — DSAI 352, Imam Abdulrahman Bin Faisal University, Spring 2026.
+Academic use — Zewail City University for Science and Technology, Spring 2026.
