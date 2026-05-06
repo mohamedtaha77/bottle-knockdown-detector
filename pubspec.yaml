@@ -1,0 +1,63 @@
+name: bottle_knockdown_app
+description: "Bottle Knockdown Detector — DSAI 352 Bonus Project (SPR 26)"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # ML / CV inference
+  tflite_flutter: ^0.11.0
+
+  # Image processing (opencv_dart added in Phase 3)
+  image: ^4.0.0
+
+  # Video processing
+  video_player: ^2.7.0
+
+  # File access & gallery
+  file_picker: ^8.1.0
+  path_provider: ^2.1.0
+  gal: ^2.3.0
+
+  # State management
+  flutter_riverpod: ^2.5.1
+
+  # UI helpers
+  percent_indicator: ^4.1.0
+
+  # Audio
+  audioplayers: ^6.1.0
+
+  # Utilities
+  logger: ^2.0.0
+  uuid: ^4.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.1
+
+# App icon configuration — run: dart run flutter_launcher_icons
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/icon/app_icon.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "#000000"
+  adaptive_icon_foreground: "assets/icon/app_icon.png"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/models/
+    - assets/icon/
+    - assets/audio/music/
+    - assets/audio/sfx/
