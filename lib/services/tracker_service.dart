@@ -150,20 +150,36 @@ class TrackerService {
     if (_nextId > _peakTotalCount) _peakTotalCount = _nextId;
   }
 
-  /// Composite match score: 50% IoU + 30% proximity + 20% colour similarity.
+  /// Composite match score: prioritises keeping existing IDs.
   double _matchScore(Bottle bottle, Detection det, img.Image frame) {
     // Normalise centroid distance by image diagonal.
     final imgDiag = math.sqrt(
         frame.width * frame.width + frame.height * frame.height.toDouble());
     final dist =
         bottle.boundingBox.centroid.distanceTo(det.box.centroid) / imgDiag;
-    if (dist > AppConstants.centroidMaxDistance) return 0.0;
+
+    // Fast-moving or falling bottles get a larger search radius.
+    final isLikelyMoving = bottle.estimatedVelocity.distance > 5.0 ||
+        bottle.isFallen ||
+        det.isFallen;
+    final maxDist = isLikelyMoving
+        ? AppConstants.centroidMaxDistance * 1.5
+        : AppConstants.centroidMaxDistance;
+
+    if (dist > maxDist) return 0.0;
 
     final iouScore = bottle.boundingBox.iou(det.box);
     final detColor = _sampleAverageColor(frame, det.box);
     final colorSim = _colorSimilarity(bottle.averageColor, detColor);
 
-    return iouScore * 0.5 + (1 - dist) * 0.3 + colorSim * 0.2;
+    // If IoU is low (common during fast motion/blur), rely more on proximity.
+    double score = iouScore * 0.4 + (1 - dist) * 0.4 + colorSim * 0.2;
+
+    // Persistence Bonus: if we are sure this is a bottle and it's near,
+    // strongly prefer the existing ID over creating a new one.
+    if (dist < 0.1) score += 0.3;
+
+    return score;
   }
 
   /// Samples ~100 evenly-spaced pixels from [box] and returns their average

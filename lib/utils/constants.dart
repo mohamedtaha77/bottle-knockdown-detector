@@ -38,7 +38,7 @@ class AppConstants {
 
   /// Maximum normalised centroid distance to consider a match between
   /// a tracked bottle and a new detection (relative to image diagonal).
-  static const double centroidMaxDistance = 0.2;
+  static const double centroidMaxDistance = 0.35;
 
   /// How many consecutive missed frames before a bottle is considered lost.
   static const int maxMissedFrames = 15;
