@@ -16,6 +16,14 @@ A Flutter Android application that uses a custom-trained **YOLOv11s** AI model t
 
 ---
 
+## 📸 Screenshots
+
+| Home Screen | Processing | Results |
+|:---:|:---:|:---:|
+| ![Home](assets/screenshots/home.png) | ![Processing](assets/screenshots/processing.png) | ![Result](assets/screenshots/result.png) |
+
+---
+
 ## 🧠 How It Works
 
 ```
